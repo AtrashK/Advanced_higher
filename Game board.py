@@ -42,27 +42,33 @@ def playerData(gameboard):
         print("That wasn't an option.")
         colour=input("What colour do you want, blue, green, red or yellow? ")
     gameboard[0].player=colour
+    print("You will start on square 1")
     return colour
 
-def rollDiceandMove(gameboard):
+def rollDiceandMove(gameboard, won):
     enter=input("Press enter to roll the dice ")
     roll=random.randint(1,6)
     print("You rolled a "+str(roll))
     found=False
     i=0
-    while(found==False and i<50):
+    while(found==False):
         if (gameboard[i].player!=""):
             found=True
-            if (i+roll>50):
+            if (i+roll>49):
                 print("That is beyond 50. Roll again")
-            gameboard[i+roll].player=gameboard[i].player
-            gameboard[i].player=""
-            print("You are now on square " + str(i+roll))
+            else:
+                gameboard[i+roll].player=gameboard[i].player
+                gameboard[i].player=""
+                print("You are now on square " + str(1+i+roll))
+                if (i+roll==49):
+                    print("You have won!")
+                    won=True
+
         i+=1
+    return won
 
 initPosition(gameboard)
-#displayBoard(gameboard)
 colour=playerData(gameboard)
 won=False
 while (won==False):
-    rollDiceandMove(gameboard)
+    won=rollDiceandMove(gameboard, won)
