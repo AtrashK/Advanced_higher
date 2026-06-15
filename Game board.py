@@ -63,12 +63,28 @@ def rollDiceandMove(gameboard, won):
                 if (i+roll==49):
                     print("You have won!")
                     won=True
-
         i+=1
-    return won
+    return gameboard, won
+
+def special_square(gameboard):
+    found=False
+    i=0
+    while(found==False and i<49):
+        if (gameboard[i].pointer!=-1 and gameboard[i].player!=""):
+            found=True
+            print("You have landed on a special square")
+            if (gameboard[i].pointer<i):
+                print("You will move back to square " + str(gameboard[i].pointer+1))
+            else:
+                print("You will move forward to square " + str(gameboard[i].pointer+1))
+            gameboard[gameboard[i].pointer].player=gameboard[i].player
+            gameboard[i].player=""
+        i+=1
+    return gameboard
 
 initPosition(gameboard)
 colour=playerData(gameboard)
 won=False
 while (won==False):
-    won=rollDiceandMove(gameboard, won)
+    gameboard, won=rollDiceandMove(gameboard, won)
+    gameboard=special_square(gameboard)
