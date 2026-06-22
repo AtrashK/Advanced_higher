@@ -34,50 +34,55 @@ def display_cards(cardarray):
         output = cardarray[index].suit
         output = output + " : " + str(cardarray[index].value)
         print(output)
+    print("")
 
-def sort_cards(cards):
+def suit_value(card):
+    suits=["spades", "clubs", "hearts", "diamonds"]
+    for i in range(len(suits)):
+        if (card.suit==suits[i]):
+            return i
+
+def sort_cards(cards, total_swaps):
     for i in range(len(cards)-1):
         j=0
         switched=True
         while(j<=i and switched):
+            print("Comparing cards " + str(cards[i+1-j].value) + " of " + cards[i+1-j].suit + " and " + str(cards[i-j].value) + " of " + cards[i-j].suit)
             current_card=cards[i+1-j]
             previous_card=cards[i-j]
             if (current_card.value<previous_card.value):
                 cards[i-j]=current_card
                 cards[i+1-j]=previous_card
+                print("Swapping")
                 j+=1
+                total_swaps+=1
+                display_cards(cards)
 
             elif (current_card.value==previous_card.value):
-                if (current_card.suit=="spades"):
-                    current_suit=0
-                elif (current_card.suit=="clubs"):
-                    current_suit=1
-                elif (current_card.suit=="hearts"):
-                    current_suit=2
-                else:
-                    current_suit=3
-
-                if (previous_card.suit=="spades"):
-                    previous_suit=0
-                elif (previous_card.suit=="clubs"):
-                    previous_suit=1
-                elif (previous_card.suit=="hearts"):
-                    previous_suit=2
-                else:
-                    previous_suit=3
-
-                if (current_suit<previous_suit):
+                if (suit_value(current_card)<suit_value(previous_card)):
                     cards[i-j]=current_card
                     cards[i+1-j]=previous_card
+                    print("Swapping")
                 j+=1
+                total_swaps+=1
+                display_cards(cards)
             else:
-                switched=False   
-    return cards 
+                print("No swap")
+                switched=False  
+
+            print("")
+    return cards, total_swaps
         
 # main program
 cards = [card() for index in range(10)]
 allcards = [card() for index in range(52)]
+
 allcards = build_deck()
 cards = draw_cards(allcards)
-cards = sort_cards(cards)
 display_cards(cards)
+
+total_swaps=0
+
+cards, total_swaps = sort_cards(cards, total_swaps)
+display_cards(cards)
+print(str(total_swaps) + " swaps were required to sort the cards.")
