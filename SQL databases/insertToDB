@@ -1,0 +1,34 @@
+# mySQL Connector SloCo INSERT Program
+# Ian Simpson, October 2019
+
+import mysql.connector
+    
+# con = mysql.connector.connect(user='root', password='', host='127.0.0.1', database='sloco')
+# c = con.cursor()
+
+# sqlstatement = "INSERT INTO `client` (`Client_ID`, `Name`, `Address`, `PhoneNo`, `FaxNo`) VALUES ('3', 'Dottore Ettore Ferrari', 'Via San Siro 18', '0223789543', '0278397895');"
+
+# c.execute(sqlstatement)
+
+# con.commit() # note it is connection, not cursor here
+
+# print(c.rowcount,"record inserted")
+
+# c.close()
+
+con = mysql.connector.connect(user='root', password='', host='127.0.0.1', database='sloco')
+c = con.cursor()
+
+client_id = input("What is your client ID? ")
+name = input("What is your name? ")
+address = input("What is your address? ")
+phoneNo = input("What is your phone number? ")
+faxNo = input("What is your fax number? ")
+
+sqlstatement = "INSERT INTO `client` (`Client_ID`, `Name`, `Address`, `PhoneNo`, `FaxNo`) VALUES (client_id, name, address, phoneNo, faxNo);" 
+c.execute(sqlstatement)
+
+con.commit()
+
+c.close()
+
