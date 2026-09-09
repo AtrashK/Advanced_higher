@@ -8,7 +8,7 @@ def BinarySearch(searchlist, goal):
     found = False
     startpos = 0
     endpos = len(searchlist) -1
-    comparisons =0
+    comparisons = 0
 
     print("Endpos at beginning = ",endpos)
 
@@ -33,6 +33,3 @@ values = initialise()
 
 goal = int(input("Enter goal "))
 print(BinarySearch(values,goal))
-
-
-# 3 4 1 4
