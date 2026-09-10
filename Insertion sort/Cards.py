@@ -48,18 +48,11 @@ def sort_cards(cards, total_swaps):
         currentcard = cards[index]
         position = index
 
-
         #shift the rest of the array one to the right
-        # print(cards[position-1])
-        # print(cards[position].value)
-        # print()
-        #while (position > 0):
-        while (position > 0) and ((cards[position-1].value > currentcard.value) or (cards[position].value == currentcard.value and suit_value(cards[position-1]) > suit_value(currentcard))):
-
+        while (position > 0) and ((cards[position-1].value > currentcard.value) or (cards[position-1].value == currentcard.value and suit_value(cards[position-1]) > suit_value(currentcard))):
                 cards[position] = cards[position-1]
                 position -= 1
                 total_swaps += 1
-
 
         #insert the value into the array
         cards[position] = currentcard
