@@ -21,7 +21,19 @@ class Human():
     
     def setHeight_cm(self, height_cm):
         self.__height_cm = height_cm
-    
+
+    def getSex(self):
+        return self.__sex
+
+    def setSex(self, sex):
+        self.__sex = sex
+
+    def getHair_colour(self):
+        return self.__hair_colour
+
+    def setHair_colour(self, hair_colour):
+        self.__hair_colour = hair_colour
+        
     # Complete the class implementation *for all setters and getters* using the UML diagram in OOP 2
 
 
