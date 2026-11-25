@@ -4,9 +4,9 @@ swaps = 0
 
 for index in range (1,len(myList)):
 #store the value to be inserted into the array
+    print(myList)
     currentvalue = myList[index]
     position = index
-
 
     #shift the rest of the array one to the right
     while position > 0 and myList[position-1]>currentvalue:
@@ -20,4 +20,4 @@ for index in range (1,len(myList)):
 
 
 print(myList)
-print(str(swaps) + " swaps were required.")
+#print(str(swaps) + " swaps were required.")
