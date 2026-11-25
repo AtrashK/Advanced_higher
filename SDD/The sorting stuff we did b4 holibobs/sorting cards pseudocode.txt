@@ -1,0 +1,31 @@
+FUNCTION suit_value(record card) RETURN integer
+    set array suits to ["spades", "clubs", "hearts", "diamonds"]
+    REPEAT WITH index FROM 0 TO (length of suits)-1
+        IF card.suit = suits[index] THEN
+            RETURN index
+        END IF
+    END LOOP
+END FUNCTION
+
+FUNCTION sort_cards(array cards, integer total_swaps) RETURN array, integer
+    REPEAT WITH index FROM 0 TO (length of cards)-1
+        SET jindex TO 0
+        SET switched TO True
+        WHILE (jindex <= index AND switched = True) THEN
+            DISPLAY("Comparing cards " & string(cards[index-jindex+1].value) & " of " & "cards[index-jindex+1].suit & " and " & str(cards[index-jindex].value) & " of " & cards[index-jindex].suit)
+            SET current_card TO cards[index+1-jindex]
+            SET previous_card TO cards[index-jindex]
+            IF (current_card.value < previous_card.value) THEN
+                SET cards[index-jindex] TO current_card
+                SET cards[index+1-jindex] TO previous_card
+                DISPLAY("Swapping")
+                INCREMENT jindex BY 1
+                INCREMENT total_swaps BY 1
+                DISPLAY_CARDS(cards)
+            ELSE IF (current_card.value = previous_card.value) THEN
+                IF (suit_value(current_card) < suit_value(previous_card)) THEN
+                    SET cards[index-jindex] TO current_card
+                    SET cards[index+1-jindex] TO previous_card
+                    DISPLAY("Swapping")
+                INCREMENT jindex BY 1
+                INCREMENT total_swaps BY 1

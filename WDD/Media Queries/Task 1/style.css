@@ -1,0 +1,14 @@
+.funny {
+  display: block;  
+}
+
+.haha {
+  display: none;  
+}
+
+@media screen and (max-width: 500px) {
+    .funny {display: none;
+    }
+    .haha {display: block;
+    }
+}
